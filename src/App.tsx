@@ -21,6 +21,7 @@ import ReactJSONView, {
 import "normalize.css";
 import Search from "antd/lib/input/Search";
 import { SliderValue } from "antd/lib/slider";
+import { FormProps } from "antd/lib/form";
 
 const { Content, Sider } = Layout;
 const { Option } = Select;
@@ -161,6 +162,23 @@ class App extends Component<Props> {
               <MySlider />
             </Sider>
             <Content>
+              <CustomForm {...formItemLayout} />
+            </Content>
+          </Layout>
+        </Layout>
+      </Layout>
+    );
+  }
+}
+
+function CustomForm(formItemLayout: FormProps) {
+  let [formList, setFormList] = useState([]);
+  return (
+    <>
+      {
+        formList.map((form, index) => {
+          return (
+            <div key={index} className="form-box">
               <Form {...formItemLayout}>
                 <Form.Item
                   label="Fail"
@@ -170,12 +188,12 @@ class App extends Component<Props> {
                   <Input placeholder="unavailable choice" id="error" />
                 </Form.Item>
               </Form>
-            </Content>
-          </Layout>
-        </Layout>
-      </Layout>
-    );
-  }
+            </div>
+          );
+        })
+      }
+    </>
+  )
 }
 
 export default App;
